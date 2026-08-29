@@ -7,42 +7,155 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00d2ff; --accent: #ff9800; --bg: #0b0f19; --card: #161e2e; }
-        * { user-select: none; }
+        * { user-select: none; box-sizing: border-box; }
         body { background-color: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; position: relative; }
-        header { width: 100%; background: linear-gradient(135deg, #00d2ff, #3a7bd5); padding: 40px 0; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        header { width: 100%; background: linear-gradient(135deg, #00d2ff, #3a7bd5); padding: 30px 0; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        
         .banner-top, .banner-bottom { width: 100%; text-align: center; background: #0a0e15; padding: 20px 0; margin: 0 auto; display: flex; justify-content: center; align-items: center; border-radius: 12px; overflow-x: auto; }
         .banner-top { max-width: 900px; margin-top: 20px; margin-bottom: 10px; }
         .banner-bottom { max-width: 900px; margin-top: 30px; margin-bottom: 20px; }
+        
         .main-container { max-width: 900px; width: 95%; margin: 0 auto; text-align: center; }
+        
+        .back-home-btn { background: #252f44; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-weight: bold; cursor: pointer; margin: 20px 0; transition: 0.3s; display: inline-flex; align-items: center; gap: 5px; text-decoration: none; }
+        .back-home-btn:hover { background: var(--primary); color: #000; }
+
         .video-wrapper-outer { position: relative; z-index: 1; }
         .video-display-area { background: #000; border-radius: 20px; overflow: hidden; border: 3px solid var(--primary); box-shadow: 0 0 30px rgba(0, 210, 255, 0.2); margin-bottom: 30px; display: none; position: relative; }
         .responsive-iframe { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
-        .responsive-iframe iframe { position: absolute; top: -160px; left: 0; width: 100%; height: calc(100% + 160px); border: 0; overflow: hidden; pointer-events: auto; }
-        .episodes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 15px; background: var(--card); padding: 25px; border-radius: 20px; max-height: 600px; overflow-y: auto; }
-        .ep-btn { background: #252f44; color: white; border: 2px solid transparent; padding: 15px 0; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .ep-btn:hover { background: var(--primary); transform: scale(1.1); border-color: white; }
+        .responsive-iframe iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; overflow: hidden; pointer-events: auto; }
+        
+        .episodes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 15px; background: var(--card); padding: 25px; border-radius: 20px; }
+        .ep-btn { background: #252f44; color: white; border: 2px solid transparent; padding: 15px 0; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; font-family: 'Cairo', sans-serif; }
+        .ep-btn:hover { background: var(--primary); transform: scale(1.1); border-color: white; color: #000; }
         .ep-btn.active { background: var(--accent); color: black; box-shadow: 0 0 15px var(--accent); }
+
         .info-text { margin-top: 20px; color: var(--primary); }
         footer { margin-top: 50px; padding: 20px; opacity: 0.4; text-align: center; }
-        @media (max-width: 600px) { .episodes-grid { grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; padding: 15px; } .ep-btn { padding: 10px 0; font-size: 1rem; } }
+        @media (max-width: 600px) { .episodes-grid { grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; padding: 15px; } .ep-btn { padding: 12px 0; font-size: 1rem; } }
     </style>
 </head>
 <body>
-<header><h1>🎬 صدى الطفولة</h1><p>اختر رقم الحلقة وابدأ المشاهدة فوراً (47 حلقة)</p></header>
-<div class="banner-top"><script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script><script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script></div>
-<div class="main-container"><div class="video-wrapper-outer"><div id="videoPlayer" class="video-display-area"><div class="responsive-iframe"><iframe id="mainIframe" src="" allowfullscreen scrolling="no"></iframe></div><div id="episodeTitle" style="padding: 10px; background: var(--card); font-weight: bold;"></div></div></div><h2>اضغط على رقم الحلقة للمشاهدة:</h2><div class="episodes-grid" id="buttonsGrid"></div><p class="info-text">جميع حلقات ساندي بيل (47 حلقة) متوفرة الآن بجودة عالية</p></div>
-<div class="banner-bottom"><script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script><script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script></div>
+
+<header>
+    <h1>⭐ مسلسل ساندي بيل</h1>
+    <p>جميع الحلقات كاملة مدبلجة - اختر رقم الحلقة وابدأ المشاهدة فوراً</p>
+</header>
+
+<!-- إعلان البنر العلوي -->
+<div class="banner-top">
+    <script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script>
+    <script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script>
+</div>
+
+<div class="main-container">
+    <a href="index.html" class="back-home-btn">⬅ العودة إلى الرئيسية</a>
+
+    <div class="video-wrapper-outer">
+        <div id="videoPlayer" class="video-display-area">
+            <div class="responsive-iframe"><iframe id="mainIframe" src="" allowfullscreen allow="autoplay; encrypted-media" scrolling="no" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe></div>
+            <div id="episodeTitle" style="padding: 10px; background: var(--card); font-weight: bold;"></div>
+        </div>
+    </div>
+
+    <h2>اضغط على رقم الحلقة للمشاهدة:</h2>
+    <div class="episodes-grid" id="buttonsGrid"></div>
+    <p class="info-text">مسلسل ساندي بيل متوفر بجودة عالية وبدون تكرار</p>
+</div>
+
+<!-- إعلان البنر السفلي -->
+<div class="banner-bottom">
+    <script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script>
+    <script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script>
+</div>
+
 <footer>جميع الحقوق محفوظة - صدى الطفولة &copy; 2026</footer>
+
 <script>
-    const adLink = "https://www.profitablecpmratenetwork.com/e41dj2h87?key=bef514b5ca3fa945e7a3b60e4a9ef21a";
-    const totalEpisodes = 47;
-    const episodeLinks = [];
-    for (let i = 0; i < totalEpisodes; i++) { episodeLinks.push(`https://cartoony.net/watch/91/${740 + i}`); }
-    const grid = document.getElementById('buttonsGrid'); const player = document.getElementById('videoPlayer'); const iframe = document.getElementById('mainIframe'); const titleDisp = document.getElementById('episodeTitle');
+    const popupAdLink = "https://www.profitablecpmratenetwork.com/e41dj2h87?key=bef514b5ca3fa945e7a3b60e4a9ef21a";
+
+    // قائمة حلقات ساندي بيل (من 1 إلى 47 بدون شارة البداية):
+    const episodeLinks = [
+        "https://www.youtube.com/embed/QGXdUeMeebs", // 1
+        "https://www.youtube.com/embed/Z1vvunFfyF4", // 2
+        "https://www.youtube.com/embed/8ctDTPZ3DdQ", // 3
+        "https://www.youtube.com/embed/_uN8qfybgWE", // 4
+        "https://www.youtube.com/embed/Qi0euzV7kOU", // 5
+        "https://www.youtube.com/embed/Sw5x-oFMKlw", // 6
+        "https://www.youtube.com/embed/sUna4NRboqc", // 7
+        "https://www.youtube.com/embed/EzHWgiaFmWA", // 8
+        "https://www.youtube.com/embed/4UT_pwYiI_U", // 9
+        "https://www.youtube.com/embed/0qclv4q36U0", // 10
+        "https://www.youtube.com/embed/TfTJ9MEWyL0", // 11
+        "https://www.youtube.com/embed/TBtE9Z2Iips", // 12
+        "https://www.youtube.com/embed/_m0ZcwUF55U", // 13
+        "https://www.youtube.com/embed/9mkgL65zNE4", // 14
+        "https://www.youtube.com/embed/TgC_TTBkYaI", // 15
+        "https://www.youtube.com/embed/rHuDsyuSZg0", // 16
+        "https://www.youtube.com/embed/Ky0bXNvVenQ", // 17
+        "https://www.youtube.com/embed/d-2fm7OpWPU", // 18
+        "https://www.youtube.com/embed/uhhAotLoms8", // 19
+        "https://www.youtube.com/embed/nHUJo0Dn-lM", // 20
+        "https://www.youtube.com/embed/4V_SrVCIdxg", // 21
+        "https://www.youtube.com/embed/bGdiTw_ZigI", // 22
+        "https://www.youtube.com/embed/bCXkKp0QiBg", // 23
+        "https://www.youtube.com/embed/G3z5dPsxDh4", // 24
+        "https://www.youtube.com/embed/NpZwrkfz7H8", // 25
+        "https://www.youtube.com/embed/pDlmyw6rnn4", // 26
+        "https://www.youtube.com/embed/njruI1QKjp4", // 27
+        "https://www.youtube.com/embed/fxJ8icusy8c", // 28
+        "https://www.youtube.com/embed/8_GKWHsQIsA", // 29
+        "https://www.youtube.com/embed/Hi9WgHS0GO0", // 30
+        "https://www.youtube.com/embed/sXwZZnDKRYI", // 31
+        "https://www.youtube.com/embed/GFZeH-0mpYQ", // 32
+        "https://www.youtube.com/embed/-F6-01SO_Zg", // 33
+        "https://www.youtube.com/embed/5y5K20iM7Ng", // 34
+        "https://www.youtube.com/embed/jhUh_DdKeUE", // 35
+        "https://www.youtube.com/embed/Cm80HQr1VX8", // 36
+        "https://www.youtube.com/embed/r5DPrymXmBI", // 37
+        "https://www.youtube.com/embed/krU1KTIohfk", // 38
+        "https://www.youtube.com/embed/Vi5IH40QRhk", // 39
+        "https://www.youtube.com/embed/2ywdImUw2zc", // 40
+        "https://www.youtube.com/embed/2fTF2wdWFJ0", // 41
+        "https://www.youtube.com/embed/VpHIRLPcx2M", // 42
+        "https://www.youtube.com/embed/tDrLTO8ejIE", // 43
+        "https://www.youtube.com/embed/6CdvD9RaTaQ", // 44
+        "https://www.youtube.com/embed/z5meOicfZNI", // 45
+        "https://www.youtube.com/embed/_VPCwVsYc7g", // 46
+        "https://www.youtube.com/embed/LiUAVWGA3Fc"  // 47 (الأخيرة)
+    ];
+
+    const grid = document.getElementById('buttonsGrid'); 
+    const player = document.getElementById('videoPlayer'); 
+    const iframe = document.getElementById('mainIframe'); 
+    const titleDisp = document.getElementById('episodeTitle');
+    
     let scrollPosition = 0;
     function lockPage() { scrollPosition = window.scrollY; document.body.style.position = 'fixed'; document.body.style.top = `-${scrollPosition}px`; document.body.style.width = '100%'; }
     function unlockPage() { document.body.style.position = ''; document.body.style.top = ''; document.body.style.width = ''; window.scrollTo(0, scrollPosition); }
-    for(let i=0; i<totalEpisodes; i++){ const btn = document.createElement('button'); btn.className = 'ep-btn'; btn.innerText = i+1; btn.onclick = (function(link, idx){ return function(){ window.open(adLink, '_blank'); lockPage(); player.style.display = 'block'; iframe.src = link; titleDisp.innerText = "أنت تشاهد الآن: ساندي بيل - الحلقة " + (idx+1); document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active')); this.classList.add('active'); setTimeout(() => { unlockPage(); }, 500); }; })(episodeLinks[i], i); grid.appendChild(btn); }
+
+    episodeLinks.forEach((link, index) => { 
+        const btn = document.createElement('button'); 
+        btn.className = 'ep-btn'; 
+        
+        let epNum = index + 1;
+        btn.innerText = epNum; 
+        
+        btn.onclick = function() { 
+            window.open(popupAdLink, '_blank');
+            
+            lockPage(); 
+            player.style.display = 'block'; 
+            iframe.src = link; 
+            titleDisp.innerText = "أنت تشاهد الآن: ساندي بيل - الحلقة " + epNum; 
+            
+            document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active')); 
+            btn.classList.add('active'); 
+            
+            setTimeout(() => { unlockPage(); }, 500); 
+        }; 
+        grid.appendChild(btn); 
+    });
 </script>
 </body>
 </html>
